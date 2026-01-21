@@ -1,0 +1,7 @@
+instructions.txt
+venv
+venv
+*.pyc
+__pycache__
+db.sqlite3
+debug_*
