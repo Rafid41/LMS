@@ -87,6 +87,16 @@ export default function Login() {
         <p className="text-center text-sm text-green-300 mt-4 hover:text-green-400 cursor-pointer transition">
           Forgot password?
         </p>
+
+        <p className="text-center text-sm text-green-300 mt-2">
+          Don't have an account?{' '}
+          <span 
+            onClick={() => navigate('/register')} 
+            className="font-bold text-green-400 hover:text-green-300 hover:underline cursor-pointer transition-colors"
+          >
+            Create one
+          </span>
+        </p>
       </div>
     </div>
   );

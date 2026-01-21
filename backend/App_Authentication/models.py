@@ -7,6 +7,18 @@ from nanoid import generate
 def generate_nanoid():
     return generate(size=10)
 
+class TemporaryRegistration(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128) # Store hashed password
+    user_type = models.CharField(max_length=10) # 'student' or 'teacher'
+    otp = models.CharField(max_length=6)
+    otp_created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Temp Reg: {self.email}"
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:

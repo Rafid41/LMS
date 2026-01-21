@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Courses from './pages/Courses';
 import Login from './features/auth/Login';
+import Register from './features/auth/Register';
 import Logout from './features/auth/Logout';
 import CourseDetail from './pages/CourseDetail';
 import CategoryCourses from './pages/CategoryCourses';
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Courses />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:courseId" element={<CourseDetail />} />
             <Route path="/courses/category/:categoryName" element={<CategoryCourses />} />
