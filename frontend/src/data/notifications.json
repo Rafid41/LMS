@@ -1,0 +1,19 @@
+{
+  "student_1": [
+    {
+      "id": 1,
+      "message": "Your assignment for 'Introduction to Programming' is due tomorrow.",
+      "read": 0
+    },
+    {
+      "id": 2,
+      "message": "New course material available for 'Web Development Fundamentals'.",
+      "read": 0
+    },
+    {
+      "id": 3,
+      "message": "Your quiz for 'Data Structures' has been graded.",
+      "read": 1
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "student1@lms.test": {
+    "name": "Student One",
+    "courses": [
+      {
+        "courseId": "course-1",
+        "title": "Intro to Web Design",
+        "progress": 60,
+        "completed_modules": 2,
+        "total_modules": 3,
+        "quiz_scores": [
+          {
+            "moduleId": "m1",
+            "score": 4,
+            "total": 5
+          },
+          {
+            "moduleId": "m2",
+            "score": 3,
+            "total": 5
+          }
+        ],
+        "points": 150
+      },
+      {
+        "courseId": "course-2",
+        "title": "JavaScript for Beginners",
+        "progress": 30,
+        "completed_modules": 1,
+        "total_modules": 2,
+        "quiz_scores": [
+          {
+            "moduleId": "m1",
+            "score": 1,
+            "total": 1
+          }
+        ],
+        "points": 70
+      }
+    ],
+    "total_points": 220,
+    "badges": ["Web Design Basics", "JavaScript Novice"]
+  },
+  "student2@lms.test": {
+    "name": "Student Two",
+    "courses": [
+      {
+        "courseId": "course-3",
+        "title": "React - The Complete Guide",
+        "progress": 80,
+        "completed_modules": 2,
+        "total_modules": 2,
+        "quiz_scores": [
+          {
+            "moduleId": "m1",
+            "score": 1,
+            "total": 1
+          },
+          {
+            "moduleId": "m2",
+            "score": 1,
+            "total": 1
+          }
+        ],
+        "points": 130
+      }
+    ],
+    "total_points": 130,
+    "badges": ["React Fundamentals"]
+  }
+}

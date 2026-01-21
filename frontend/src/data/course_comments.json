@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "id": "comment-1",
+      "courseId": "course-1",
+      "userId": "user-1",
+      "comment": "This is a great course! I learned a lot.",
+      "rating": 5
+    },
+    {
+      "id": "comment-2",
+      "courseId": "course-1",
+      "userId": "user-2",
+      "comment": "The instructor is very clear and easy to understand.",
+      "rating": 4
+    },
+    {
+      "id": "comment-3",
+      "courseId": "course-2",
+      "userId": "user-1",
+      "comment": "I'm enjoying this course so far.",
+      "rating": 4
+    }
+  ]
+}

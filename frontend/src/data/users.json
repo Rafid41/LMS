@@ -1,0 +1,9 @@
+{
+  "students": [
+    { "id": "user-1", "email": "student1@lms.test", "password": "12345", "name": "Student One", "bio": "A passionate learner exploring the world of web development. I love building things and solving problems.", "dateOfBirth": "1998-07-15", "enrolledCourses": ["CS101", "WD101"] },
+    { "id": "user-2", "email": "student2@lms.test", "password": "12345", "name": "Student Two" }
+  ],
+  "teachers": [
+    { "id": "teacher-1", "email": "teacher1@lms.test", "password": "abcde", "name": "Teacher One" }
+  ]
+}

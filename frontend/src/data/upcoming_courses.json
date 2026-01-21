@@ -1,0 +1,102 @@
+{
+  "upcoming_courses": [
+    {
+      "id": "upcoming-course-1",
+      "title": "Advanced AI Ethics",
+      "author": "Dr. Anya Sharma",
+      "description": "Explore the complex ethical considerations and societal impacts of advanced artificial intelligence systems.",
+      "category": ["Artificial Intelligence", "Philosophy"]
+    },
+    {
+      "id": "upcoming-course-2",
+      "title": "Quantum Computing Fundamentals",
+      "author": "Prof. Ben Carter",
+      "description": "An introductory course to the principles and applications of quantum computing.",
+      "category": ["Computer Science", "Science"]
+    },
+    {
+      "id": "upcoming-course-3",
+      "title": "Modern European History: 1900-Present",
+      "author": "Dr. Clara Davies",
+      "description": "A deep dive into the major political, social, and cultural developments in Europe from the 20th century to today.",
+      "category": ["History"]
+    },
+    {
+      "id": "upcoming-course-4",
+      "title": "Sustainable Engineering Practices",
+      "author": "Eng. David Evans",
+      "description": "Learn about environmentally friendly design and construction methods in various engineering disciplines.",
+      "category": ["Engineering", "Environmental Studies"]
+    },
+    {
+      "id": "upcoming-course-5",
+      "title": "Introduction to Machine Learning with Python",
+      "author": "Dr. Emily White",
+      "description": "A beginner-friendly course covering the fundamentals of machine learning using Python and popular libraries.",
+      "category": ["Computer Science", "Programming"]
+    },
+    {
+      "id": "upcoming-course-6",
+      "title": "Digital Marketing Strategies for Startups",
+      "author": "Prof. Mark Johnson",
+      "description": "Learn essential digital marketing techniques to grow your startup, including SEO, social media, and content marketing.",
+      "category": ["Marketing", "Business"]
+    },
+    {
+      "id": "upcoming-course-7",
+      "title": "Creative Writing: Fiction and Storytelling",
+      "author": "Ms. Sarah Adams",
+      "description": "Develop your storytelling skills and craft compelling narratives in this creative writing workshop.",
+      "category": ["Arts", "Literature"]
+    },
+    {
+      "id": "upcoming-course-8",
+      "title": "Financial Accounting for Non-Accountants",
+      "author": "Mr. Robert Green",
+      "description": "Understand the basics of financial accounting, balance sheets, income statements, and cash flow.",
+      "category": ["Business", "Economics"]
+    },
+    {
+      "id": "upcoming-course-9",
+      "title": "Web Development with React and Node.js",
+      "author": "Dr. Olivia Brown",
+      "description": "Build full-stack web applications using React for the frontend and Node.js with Express for the backend.",
+      "category": ["Computer Science", "Programming"]
+    },
+    {
+      "id": "upcoming-course-10",
+      "title": "Introduction to Psychology: Mind and Behavior",
+      "author": "Prof. Daniel Lee",
+      "description": "Explore the scientific study of the mind and behavior, covering topics like perception, memory, and personality.",
+      "category": ["Psychology", "Science"]
+    },
+    {
+      "id": "upcoming-course-11",
+      "title": "Graphic Design Fundamentals with Adobe Illustrator",
+      "author": "Ms. Jessica Taylor",
+      "description": "Master the essential tools and techniques of Adobe Illustrator to create stunning vector graphics.",
+      "category": ["Design", "Arts"]
+    },
+    {
+      "id": "upcoming-course-12",
+      "title": "Data Science for Business Decisions",
+      "author": "Dr. Michael Clark",
+      "description": "Learn how to apply data science techniques to extract insights and make informed business decisions.",
+      "category": ["Business", "Computer Science"]
+    },
+    {
+      "id": "upcoming-course-13",
+      "title": "Photography Masterclass: From Beginner to Pro",
+      "author": "Mr. Chris Wilson",
+      "description": "A comprehensive course covering everything from camera basics to advanced editing techniques in photography.",
+      "category": ["Photography", "Arts"]
+    },
+    {
+      "id": "upcoming-course-14",
+      "title": "Environmental Law and Policy",
+      "author": "Prof. Laura Martinez",
+      "description": "Examine the legal frameworks and policies designed to protect the environment and promote sustainability.",
+      "category": ["Law", "Environmental Studies"]
+    }
+  ]
+}

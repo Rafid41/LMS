@@ -1,0 +1,558 @@
+{
+  "courses": [
+    {
+      "id": "course-1",
+      "title": "Intro to Web Design",
+      "author": "Instructor A",
+      "description": "A comprehensive introduction to web design, covering HTML, CSS, and responsive design principles.",
+      "image": "/assets/images/courses/course-1.png",
+      "category": ["Design", "Programming"],
+      "rating": 4.5,
+      "date": "2025-10-15",
+      "modules": [
+        {
+          "id": "m1",
+          "title": "Module 1 — Basics of Web Design",
+          "order": 1,
+          "unlocked": true,
+          "required_points": 0,
+          "resources": [
+            {
+              "id": "r1",
+              "title": "Introduction Video",
+              "type": "video",
+              "src": "/assets/videos/ms_excel.mp4",
+              "description": "A brief overview of the course and what you will learn.",
+              "points": 20
+            },
+            {
+              "id": "r2",
+              "title": "Syllabus PDF",
+              "type": "pdf",
+              "src": "/assets/docs/syllabus-1.pdf",
+              "points": 10
+            },
+            {
+              "id": "r3",
+              "title": "Module Notes (DOC)",
+              "type": "doc",
+              "src": "/assets/docs/module1-notes.docx",
+              "points": 10
+            },
+            {
+              "id": "r4",
+              "title": "Slides",
+              "type": "slide",
+              "src": "/assets/slides/module1.pptx",
+              "points": 15
+            }
+          ],
+          "assignment": {
+            "title": "Create a simple HTML page",
+            "description": "Create an HTML page with a heading, a paragraph, and an image. Zip the file and upload it.",
+            "deadline": "2025-11-10",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q1",
+            "questions": [
+              {
+                "id": "q1_1",
+                "question": "What does HTML stand for?",
+                "options": [
+                  "Hyper Text Markup Language",
+                  "High Text Markup Language",
+                  "Hyper Tabular Markup Language",
+                  "Hyperlink and Text Management Language"
+                ],
+                "answer": 0
+              },
+              {
+                "id": "q1_2",
+                "question": "Which tag is used to create a hyperlink in HTML?",
+                "options": ["<link>", "<a>", "<href>", "<url>"],
+                "answer": 1
+              },
+              {
+                "id": "q1_3",
+                "question": "Which attribute specifies an image source in HTML?",
+                "options": ["src", "href", "alt", "link"],
+                "answer": 0
+              },
+              {
+                "id": "q1_4",
+                "question": "Which tag is used to define the largest heading?",
+                "options": ["<head>", "<h1>", "<header>", "<title>"],
+                "answer": 1
+              },
+              {
+                "id": "q1_5",
+                "question": "Which of the following is used to display an image?",
+                "options": ["<image>", "<img>", "<pic>", "<src>"],
+                "answer": 1
+              }
+            ],
+            "points": 50
+          }
+        },
+        {
+          "id": "m2",
+          "title": "Module 2 — Layouts and Styling",
+          "order": 2,
+          "unlocked": false,
+          "required_points": 100,
+          "resources": [
+            {
+              "id": "r5",
+              "title": "CSS Basics Video",
+              "type": "video",
+              "src": "/assets/videos/css.mp4",
+              "description": "Learn the basics of CSS and how to style your web pages.",
+              "points": 20
+            },
+            {
+              "id": "r6",
+              "title": "Layout Design PDF",
+              "type": "pdf",
+              "src": "/assets/docs/layout.pdf",
+              "points": 10
+            },
+            {
+              "id": "r7",
+              "title": "Flexbox Slides",
+              "type": "slide",
+              "src": "/assets/slides/flexbox.pptx",
+              "points": 15
+            }
+          ],
+          "assignment": {
+            "title": "Create a responsive layout",
+            "description": "Create a responsive layout using CSS Flexbox. Zip the file and upload it.",
+            "deadline": "2025-11-20",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q2",
+            "questions": [
+              {
+                "id": "q2_1",
+                "question": "Which CSS property changes text color?",
+                "options": ["font-color", "color", "text-color", "font-style"],
+                "answer": 1
+              },
+              {
+                "id": "q2_2",
+                "question": "Which CSS property controls the text size?",
+                "options": ["font-style", "font-size", "text-size", "text-style"],
+                "answer": 1
+              },
+              {
+                "id": "q2_3",
+                "question": "Which value of 'position' places an element relative to the browser window?",
+                "options": ["static", "absolute", "fixed", "relative"],
+                "answer": 2
+              },
+              {
+                "id": "q2_4",
+                "question": "Which property is used to make text bold in CSS?",
+                "options": ["font-bold", "bold", "font-weight", "text-bold"],
+                "answer": 2
+              },
+              {
+                "id": "q2_5",
+                "question": "Which property is used to set background color in CSS?",
+                "options": ["bgcolor", "background", "background-color", "color-background"],
+                "answer": 2
+              }
+            ],
+            "points": 50
+          }
+        },
+        {
+          "id": "m3",
+          "title": "Module 3 — Responsive Design",
+          "order": 3,
+          "unlocked": false,
+          "required_points": 250,
+          "resources": [
+            {
+              "id": "r8",
+              "title": "Responsive Concepts (Video)",
+              "type": "video",
+              "src": "/assets/videos/responsive.mp4",
+              "description": "Learn how to make your websites look great on all devices.",
+              "points": 25
+            },
+            {
+              "id": "r9",
+              "title": "Media Queries PDF",
+              "type": "pdf",
+              "src": "/assets/docs/media-queries.pdf",
+              "points": 10
+            }
+          ],
+          "assignment": {
+            "title": "Create a responsive website",
+            "description": "Create a simple responsive website with a navigation bar, a hero section, and a footer. Zip the file and upload it.",
+            "deadline": "2025-11-30",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q3",
+            "questions": [
+              {
+                "id": "q3_1",
+                "question": "Which tag makes a site responsive?",
+                "options": ["<div>", "<meta>", "<style>", "<viewport>"],
+                "answer": 1
+              },
+              {
+                "id": "q3_2",
+                "question": "Which CSS feature helps make a design responsive?",
+                "options": ["Flexbox", "Colors", "Fonts", "Padding"],
+                "answer": 0
+              },
+              {
+                "id": "q3_3",
+                "question": "Which CSS unit is relative to the width of the viewport?",
+                "options": ["em", "px", "vw", "%"],
+                "answer": 2
+              },
+              {
+                "id": "q3_4",
+                "question": "Which HTML element helps define viewport settings?",
+                "options": ["<meta>", "<link>", "<header>", "<script>"],
+                "answer": 0
+              },
+              {
+                "id": "q3_5",
+                "question": "What is the purpose of media queries?",
+                "options": [
+                  "To load external media files",
+                  "To apply styles based on device characteristics",
+                  "To embed video and audio",
+                  "To define animations"
+                ],
+                "answer": 1
+              }
+            ],
+            "points": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "course-2",
+      "title": "JavaScript for Beginners",
+      "author": "Instructor B",
+      "description": "Learn the fundamentals of JavaScript, the most popular programming language for web development.",
+      "image": "/assets/images/courses/course-2.png",
+      "category": ["Programming", "Computer Science"],
+      "rating": 4.2,
+      "date": "2025-09-20",
+      "modules": [
+        {
+          "id": "m1",
+          "title": "Module 1 — JS Basics",
+          "order": 1,
+          "unlocked": true,
+          "required_points": 0,
+          "resources": [
+            { "id": "r1", "title": "JS Intro Video", "type": "video", "src": "/assets/videos/js-intro.mp4", "description": "An introduction to JavaScript and its core concepts.", "points": 20 },
+            { "id": "r2", "title": "Variables and Data Types", "type": "pdf", "src": "/assets/docs/js-vars.pdf", "points": 10 }
+          ],
+          "assignment": {
+            "title": "Declare variables and perform operations",
+            "description": "Declare variables of different data types and perform some basic operations. Submit the .js file.",
+            "deadline": "2025-11-12",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q1",
+            "questions": [
+              { "id": "q1_1", "question": "What is JavaScript?", "options": ["A markup language", "A programming language", "A styling language"], "answer": 1 }
+            ],
+            "points": 50
+          }
+        },
+        {
+          "id": "m2",
+          "title": "Module 2 — Functions and Scope",
+          "order": 2,
+          "unlocked": false,
+          "required_points": 70,
+          "resources": [
+            { "id": "r3", "title": "Functions Video", "type": "video", "src": "/assets/videos/js-functions.mp4", "description": "Learn how to write and use functions in JavaScript.", "points": 25 },
+            { "id": "r4", "title": "Scope Explained", "type": "doc", "src": "/assets/docs/js-scope.docx", "points": 15 }
+          ],
+          "assignment": {
+            "title": "Write a function",
+            "description": "Write a function that takes two numbers as arguments and returns their sum. Submit the .js file.",
+            "deadline": "2025-11-22",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q2",
+            "questions": [
+              { "id": "q2_1", "question": "What is a function?", "options": ["A variable", "A block of code", "An object"], "answer": 1 }
+            ],
+            "points": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "course-3",
+      "title": "React - The Complete Guide",
+      "author": "Instructor C",
+      "description": "Dive deep into React and learn to build powerful, interactive web applications.",
+      "image": "/assets/images/courses/course-3.png",
+      "category": ["Programming", "Computer Science"],
+      "rating": 4.8,
+      "date": "2025-11-01",
+      "modules": [
+        {
+          "id": "m1",
+          "title": "Module 1 — React Fundamentals",
+          "order": 1,
+          "unlocked": true,
+          "required_points": 0,
+          "resources": [
+            { "id": "r1", "title": "React Intro Video", "type": "video", "src": "/assets/videos/react-intro.mp4", "description": "An introduction to React and its component-based architecture.", "points": 25 },
+            { "id": "r2", "title": "Components and Props", "type": "pdf", "src": "/assets/docs/react-components.pdf", "points": 15 }
+          ],
+          "assignment": {
+            "title": "Create a React component",
+            "description": "Create a simple React component that displays 'Hello, World!'. Submit the .jsx file.",
+            "deadline": "2025-11-15",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q1",
+            "questions": [
+              { "id": "q1_1", "question": "What is React?", "options": ["A framework", "A library", "A language"], "answer": 1 }
+            ],
+            "points": 60
+          }
+        },
+        {
+          "id": "m2",
+          "title": "Module 2 — State and Lifecycle",
+          "order": 2,
+          "unlocked": false,
+          "required_points": 80,
+          "resources": [
+            { "id": "r3", "title": "State Management Video", "type": "video", "src": "/assets/videos/react-state.mp4", "description": "Learn how to manage state in React components.", "points": 30 },
+            { "id": "r4", "title": "Lifecycle Methods", "type": "slide", "src": "/assets/slides/react-lifecycle.pptx", "points": 20 }
+          ],
+          "assignment": {
+            "title": "Create a stateful component",
+            "description": "Create a React component with a state that changes when a button is clicked. Submit the .jsx file.",
+            "deadline": "2025-11-25",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q2",
+            "questions": [
+              { "id": "q2_1", "question": "What is state in React?", "options": ["A component's internal data", "A global variable", "A prop"], "answer": 0 }
+            ],
+            "points": 70
+          }
+        }
+      ]
+    },
+    {
+      "id": "course-4",
+      "title": "Node.js - From Zero to Hero",
+      "author": "Instructor D",
+      "description": "Build fast and scalable server-side applications with Node.js and Express.",
+      "image": "/assets/images/courses/course-4.png",
+      "category": ["Programming", "Computer Science"],
+      "rating": 4.6,
+      "date": "2025-08-10",
+      "modules": [
+        {
+          "id": "m1",
+          "title": "Module 1 — Node.js Basics",
+          "order": 1,
+          "unlocked": true,
+          "required_points": 0,
+          "resources": [
+            { "id": "r1", "title": "Node.js Intro Video", "type": "video", "src": "/assets/videos/node-intro.mp4", "description": "An introduction to Node.js and its event-driven architecture.", "points": 30 },
+            { "id": "r2", "title": "NPM and Packages", "type": "pdf", "src": "/assets/docs/npm-packages.pdf", "points": 20 }
+          ],
+          "assignment": {
+            "title": "Create a simple Node.js server",
+            "description": "Create a simple Node.js server that listens on port 3000 and responds with 'Hello, World!'. Submit the .js file.",
+            "deadline": "2025-11-18",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q1",
+            "questions": [
+              { "id": "q1_1", "question": "What is Node.js?", "options": ["A browser", "A runtime environment", "A framework"], "answer": 1 }
+            ],
+            "points": 70
+          }
+        },
+        {
+          "id": "m2",
+          "title": "Module 2 — Express.js Framework",
+          "order": 2,
+          "unlocked": false,
+          "required_points": 100,
+          "resources": [
+            { "id": "r3", "title": "Express Intro Video", "type": "video", "src": "/assets/videos/express-intro.mp4", "description": "Learn how to build web applications with Express.js.", "points": 35 },
+            { "id": "r4", "title": "Routing in Express", "type": "doc", "src": "/assets/docs/express-routing.docx", "points": 25 }
+          ],
+          "assignment": {
+            "title": "Create a simple Express.js app",
+            "description": "Create a simple Express.js app with a few routes. Submit the .js file.",
+            "deadline": "2025-11-28",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q2",
+            "questions": [
+              { "id": "q2_1", "question": "What is Express.js?", "options": ["A database", "A Node.js web framework", "A frontend library"], "answer": 1 }
+            ],
+            "points": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "course-5",
+      "title": "Python for Data Science",
+      "author": "Instructor E",
+      "description": "Learn Python and its powerful libraries for data analysis, visualization, and machine learning.",
+      "image": "/assets/images/courses/course-5.png",
+      "category": ["Programming", "Science", "Computer Science"],
+      "rating": 4.9,
+      "date": "2025-07-25",
+      "modules": [
+        {
+          "id": "m1",
+          "title": "Module 1 — Python Basics",
+          "order": 1,
+          "unlocked": true,
+          "required_points": 0,
+          "resources": [
+            { "id": "r1", "title": "Python Intro Video", "type": "video", "src": "/assets/videos/python-intro.mp4", "description": "An introduction to Python and its syntax.", "points": 35 },
+            { "id": "r2", "title": "Data Structures in Python", "type": "pdf", "src": "/assets/docs/python-datastructures.pdf", "points": 25 }
+          ],
+          "assignment": {
+            "title": "Work with Python data structures",
+            "description": "Create a Python script that uses lists, tuples, and dictionaries. Submit the .py file.",
+            "deadline": "2025-11-20",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q1",
+            "questions": [
+              { "id": "q1_1", "question": "What is Python primarily used for?", "options": ["Web development", "Data science", "Mobile app development"], "answer": 1 }
+            ],
+            "points": 80
+          }
+        },
+        {
+          "id": "m2",
+          "title": "Module 2 — Pandas and NumPy",
+          "order": 2,
+          "unlocked": false,
+          "required_points": 120,
+          "resources": [
+            { "id": "r3", "title": "Pandas Tutorial", "type": "video", "src": "/assets/videos/pandas-tutorial.mp4", "description": "Learn how to use the Pandas library for data analysis.", "points": 40 },
+            { "id": "r4", "title": "NumPy Basics", "type": "slide", "src": "/assets/slides/numpy-basics.pptx", "points": 30 }
+          ],
+          "assignment": {
+            "title": "Analyze data with Pandas",
+            "description": "Use Pandas to analyze a CSV file and calculate some basic statistics. Submit the .py file.",
+            "deadline": "2025-11-30",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q2",
+            "questions": [
+              { "id": "q2_1", "question": "What is Pandas used for?", "options": ["Data visualization", "Data analysis", "Web scraping"], "answer": 1 }
+            ],
+            "points": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "course-6",
+      "title": "UI/UX Design Fundamentals",
+      "author": "Instructor F",
+      "description": "Master the principles of user interface and user experience design to create intuitive and beautiful products.",
+      "image": "/assets/images/courses/course-6.png",
+      "category": ["Design", "Arts"],
+      "rating": 4.7,
+      "date": "2025-10-05",
+      "modules": [
+        {
+          "id": "m1",
+          "title": "Module 1 — UI/UX Intro",
+          "order": 1,
+          "unlocked": true,
+          "required_points": 0,
+          "resources": [
+            { "id": "r1", "title": "UI/UX Intro Video", "type": "video", "src": "/assets/videos/uiux-intro.mp4", "description": "An introduction to the principles of UI/UX design.", "points": 20 },
+            { "id": "r2", "title": "User-Centered Design", "type": "pdf", "src": "/assets/docs/user-centered-design.pdf", "points": 10 }
+          ],
+          "assignment": {
+            "title": "Create a user persona",
+            "description": "Create a user persona for a fictional product. Submit the persona as a PDF file.",
+            "deadline": "2025-11-22",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q1",
+            "questions": [
+              { "id": "q1_1", "question": "What does UI stand for?", "options": ["User Interface", "User Interaction", "Universal Interface"], "answer": 0 }
+            ],
+            "points": 50
+          }
+        },
+        {
+          "id": "m2",
+          "title": "Module 2 — Wireframing and Prototyping",
+          "order": 2,
+          "unlocked": false,
+          "required_points": 60,
+          "resources": [
+            { "id": "r3", "title": "Wireframing Tools", "type": "video", "src": "/assets/videos/wireframing-tools.mp4", "description": "Learn how to use popular wireframing tools.", "points": 25 },
+            { "id": "r4", "title": "Prototyping Best Practices", "type": "doc", "src": "/assets/docs/prototyping-best-practices.docx", "points": 15 }
+          ],
+          "assignment": {
+            "title": "Create a wireframe",
+            "description": "Create a wireframe for a simple mobile app. Submit the wireframe as a PDF file.",
+            "deadline": "2025-12-02",
+            "file": true,
+            "points": 20
+          },
+          "quiz": {
+            "id": "q2",
+            "questions": [
+              { "id": "q2_1", "question": "What is a wireframe?", "options": ["A high-fidelity design", "A low-fidelity layout", "A functional prototype"], "answer": 1 }
+            ],
+            "points": 60
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+
+@font-face {
+    font-family: 'Graduate';
+    src: url('/assets/fonts/Graduate-Regular.ttf') format('truetype');
+  }
+  
+  .font-graduate {
+    font-family: 'Graduate', sans-serif;
+  }

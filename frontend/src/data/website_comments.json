@@ -1,0 +1,65 @@
+
+{
+  "comments": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "comment": "This is an amazing website! I love the design and the user experience."
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "comment": "The courses are very informative and well-structured. I have learned a lot."
+    },
+    {
+      "id": 3,
+      "name": "Peter Jones",
+      "comment": "I am very impressed with the quality of the content. Keep up the good work!"
+    },
+    {
+      "id": 4,
+      "name": "Mary Williams",
+      "comment": "The website is very easy to use and navigate. I found everything I was looking for."
+    },
+    {
+      "id": 5,
+      "name": "David Brown",
+      "comment": "I would highly recommend this website to anyone who wants to learn new skills."
+    },
+    {
+      "id": 6,
+      "name": "Susan Davis",
+      "comment": "The instructors are very knowledgeable and experienced. I have learned a lot from them."
+    },
+    {
+      "id": 7,
+      "name": "Robert Miller",
+      "comment": "The website is very well-designed and user-friendly. I am very impressed."
+    },
+    {
+      "id": 8,
+      "name": "Linda Wilson",
+      "comment": "I am very happy with the courses I have taken. I have learned a lot and I am very grateful."
+    },
+    {
+      "id": 9,
+      "name": "Michael Moore",
+      "comment": "This is the best e-learning platform I have ever used. I would highly recommend it."
+    },
+    {
+      "id": 10,
+      "name": "Karen Taylor",
+      "comment": "The courses are very practical and hands-on. I have learned a lot of new skills."
+    },
+    {
+      "id": 11,
+      "name": "James Anderson",
+      "comment": "I am very impressed with the quality of the content. The instructors are very knowledgeable."
+    },
+    {
+      "id": 12,
+      "name": "Patricia Thomas",
+      "comment": "The website is very easy to use and the courses are very informative. I would highly recommend it."
+    }
+  ]
+}

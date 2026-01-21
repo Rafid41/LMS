@@ -1,0 +1,68 @@
+{
+  "live_classes": [
+    {
+      "id": "lc-1",
+      "title": "Live Class: Intro to Web Design - HTML Basics",
+      "courseId": "course-1",
+      "module": "m1",
+      "content": "Intro to Web Design course by Instructor A has a live class ongoing about HTML Basics in Module 1.",
+      "link": "/courses/course-1"
+    },
+    {
+      "id": "lc-2",
+      "title": "Live Class: JavaScript for Beginners - Functions and Scope",
+      "courseId": "course-2",
+      "module": "m2",
+      "content": "JavaScript for Beginners course by Instructor B has a live class ongoing about Functions and Scope in Module 2.",
+      "link": "/courses/course-2"
+    },
+    {
+      "id": "lc-3",
+      "title": "Live Class: React - The Complete Guide - State Management",
+      "courseId": "course-3",
+      "module": "m2",
+      "content": "React - The Complete Guide course by Instructor C has a live class ongoing about State Management in Module 2.",
+      "link": "/courses/course-3"
+    },
+    {
+      "id": "lc-4",
+      "title": "Live Class: Node.js - From Zero to Hero - Express.js Framework",
+      "courseId": "course-4",
+      "module": "m2",
+      "content": "Node.js - From Zero to Hero course by Instructor D has a live class ongoing about Express.js Framework in Module 2.",
+      "link": "/courses/course-4"
+    },
+    {
+      "id": "lc-5",
+      "title": "Live Class: Python for Data Science - Pandas and NumPy",
+      "courseId": "course-5",
+      "module": "m2",
+      "content": "Python for Data Science course by Instructor E has a live class ongoing about Pandas and NumPy in Module 2.",
+      "link": "/courses/course-5"
+    },
+    {
+      "id": "lc-6",
+      "title": "Live Class: UI/UX Design Fundamentals - Wireframing",
+      "courseId": "course-6",
+      "module": "m2",
+      "content": "UI/UX Design Fundamentals course by Instructor F has a live class ongoing about Wireframing in Module 2.",
+      "link": "/courses/course-6"
+    },
+    {
+      "id": "lc-7",
+      "title": "Live Class: Intro to Web Design - Layouts and Styling",
+      "courseId": "course-1",
+      "module": "m2",
+      "content": "Intro to Web Design course by Instructor A has a live class ongoing about Layouts and Styling in Module 2.",
+      "link": "/courses/course-1"
+    },
+    {
+      "id": "lc-8",
+      "title": "Live Class: JavaScript for Beginners - JS Basics",
+      "courseId": "course-2",
+      "module": "m1",
+      "content": "JavaScript for Beginners course by Instructor B has a live class ongoing about JS Basics in Module 1.",
+      "link": "/courses/course-2"
+    }
+  ]
+}
