@@ -17,6 +17,7 @@ import QuizReview from './features/quiz/QuizReview';
 import StudentDashboard from './features/dashboards/StudentDashboard';
 import TeacherDashboard from './features/dashboards/TeacherDashboard';
 import AdminDashboard from './features/dashboards/AdminDashboard';
+import LanguageManager from './features/admin/LanguageManager';
 import Profile from './pages/Profile';
 import Categories from './pages/Categories';
 import NoticeDetails from './pages/NoticeDetails';
@@ -48,6 +49,7 @@ function App() {
             <Route path="/student" element={<StudentDashboard />} />
             <Route path="/teacher" element={<TeacherDashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/languages" element={<LanguageManager />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<WebsiteSettings />} />
           </Routes>
