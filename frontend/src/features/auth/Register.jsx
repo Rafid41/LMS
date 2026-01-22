@@ -4,8 +4,11 @@ import InputField from "./InputField";
 import * as authService from "../../services/authService";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
+import { useAuth } from "../../contexts/AuthContext";
+
 export default function Register() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   // State
   const [selectedRole, setSelectedRole] = useState("");
@@ -126,7 +129,8 @@ export default function Register() {
           role: res.data.role, 
           email: res.data.email
       };
-      localStorage.setItem("lms_session", JSON.stringify(session));
+      
+      login(session); // Update Context
 
       setTimeout(() => {
         if (res.data.role === 'student') {

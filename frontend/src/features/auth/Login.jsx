@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import InputField from "./InputField";
 import * as authService from "../../services/authService";
 import { Loader2, AlertCircle } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get login function
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +35,8 @@ export default function Login() {
           role: res.data.role, 
           email: res.data.email 
       };
-      localStorage.setItem("lms_session", JSON.stringify(session));
+      
+      login(session); // Update Context
 
       // Redirect based on role
       if (res.data.role === 'student') {
