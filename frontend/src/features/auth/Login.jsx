@@ -43,6 +43,8 @@ export default function Login() {
         navigate("/student");
       } else if (res.data.role === 'teacher') {
         navigate("/teacher");
+      } else if (res.data.role === 'admin') {
+        navigate("/admin");
       } else {
         navigate("/courses");
       }

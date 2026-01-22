@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
 
-export default function AdminDashboard() {
+const AdminDashboard = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-100 to-gray-300">
-      <h1 className="text-4xl font-bold text-gray-800">Admin Dashboard</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      <h1 className="text-3xl font-bold">Admin Dashboard</h1>
     </div>
   );
-}
+};
+
+export default AdminDashboard;
