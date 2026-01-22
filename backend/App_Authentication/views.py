@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
 from .models import TemporaryRegistration, UserType
-from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer, LoginSerializer
+from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer, LoginSerializer, ForgotPasswordSerializer, VerifyResetOTPSerializer, ResetPasswordSerializer, ResendForgotPasswordOTPSerializer
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 import random
@@ -20,13 +20,20 @@ User = get_user_model()
 def generate_otp():
     return ''.join(random.choices(string.ascii_letters + string.digits, k=6))
 
-def send_otp_email(email, otp, subject='Verify your email - LMS'):
+def send_otp_email(email, otp, subject='Verify your email - LMS', is_reset=False):
+    # Colors: Green for Register, Red/Orange for Reset
+    color = "#EF4444" if is_reset else "#10B981" 
+    bg_color = "#fef2f2" if is_reset else "#f0fdf4"
+    border_color = "#EF4444" if is_reset else "#10B981"
+    title_text = "Reset Your Password" if is_reset else "Verify Your Email Address"
+    desc_text = "Use the code below to reset your LMS password." if is_reset else "Use the code below to complete your registration with LMS."
+    
     html_message = f"""
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
-        <h2 style="color: #333; text-align: center;">Verify Your Email Address</h2>
-        <p style="font-size: 16px; color: #555; text-align: center;">Use the code below to complete your registration with LMS.</p>
+        <h2 style="color: #333; text-align: center;">{title_text}</h2>
+        <p style="font-size: 16px; color: #555; text-align: center;">{desc_text}</p>
         <div style="margin: 30px 0; text-align: center;">
-            <h1 style="color: #10B981; font-size: 40px; letter-spacing: 5px; margin: 0; padding: 10px; background-color: #f0fdf4; display: inline-block; border-radius: 8px; border: 1px dashed #10B981;">{otp}</h1>
+            <h1 style="color: {color}; font-size: 40px; letter-spacing: 5px; margin: 0; padding: 10px; background-color: {bg_color}; display: inline-block; border-radius: 8px; border: 1px dashed {border_color};">{otp}</h1>
         </div>
         <p style="font-size: 14px; color: #999; text-align: center;">This code is valid for 10 minutes. If you didn't request this, please ignore this email.</p>
         <div style="text-align: center; margin-top: 20px;">
@@ -197,3 +204,120 @@ class LoginView(APIView):
             'role': role,
             'message': 'Login successful'
         }, status=status.HTTP_200_OK)
+
+class ForgotPasswordView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = ForgotPasswordSerializer(data=request.data)
+        if not serializer.is_valid():
+             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        email = serializer.validated_data['email']
+        
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'error': 'User with this email does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        otp = generate_otp()
+        user.otp = otp
+        user.otp_created_at = timezone.now()
+        user.save()
+
+        try:
+            send_otp_email(email, otp, subject='Reset Password - LMS', is_reset=True)
+        except Exception as e:
+             return Response({'error': 'Failed to send OTP email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response({'message': 'OTP sent to your email.'}, status=status.HTTP_200_OK)
+
+class VerifyResetOTPView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = VerifyResetOTPSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        email = serializer.validated_data['email']
+        otp = serializer.validated_data['otp']
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if user.otp != otp:
+            return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if user.otp_created_at:
+            time_diff = timezone.now() - user.otp_created_at
+            if time_diff.total_seconds() > 600: # 10 mins
+                return Response({'error': 'OTP has expired'}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'message': 'OTP verified successfully'}, status=status.HTTP_200_OK)
+
+class ResetPasswordView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = ResetPasswordSerializer(data=request.data)
+        if not serializer.is_valid():
+             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        email = serializer.validated_data['email']
+        otp = serializer.validated_data['otp']
+        new_password = serializer.validated_data['new_password']
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if user.otp != otp:
+             return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if user.otp_created_at:
+             time_diff = timezone.now() - user.otp_created_at
+             if time_diff.total_seconds() > 600:
+                 return Response({'error': 'OTP has expired'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(new_password)
+        user.otp = None
+        user.otp_created_at = None
+        user.save()
+
+        return Response({'message': 'Password reset successfully. Please login with your new password.'}, status=status.HTTP_200_OK)
+
+class ResendForgotPasswordOTPView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = ResendForgotPasswordOTPSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        email = serializer.validated_data['email']
+        
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if user.otp_created_at:
+            time_diff = timezone.now() - user.otp_created_at
+            if time_diff.total_seconds() < 60:
+                 return Response({'error': 'Please wait before resending OTP'}, status=status.HTTP_429_TOO_MANY_REQUESTS)
+
+        otp = generate_otp()
+        user.otp = otp
+        user.otp_created_at = timezone.now()
+        user.save()
+
+        try:
+            send_otp_email(email, otp, subject='Resend: Reset Password - LMS', is_reset=True)
+        except Exception:
+             return Response({'error': 'Failed to send OTP email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response({'message': 'OTP resent successfully'}, status=status.HTTP_200_OK)

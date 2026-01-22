@@ -6,7 +6,7 @@ import ScrollToTop from './ScrollToTop';
 
 const MainLayout = ({ children }) => {
   const location = useLocation();
-  const hideNavbar = location.pathname === '/login' || location.pathname === '/register';
+  const hideNavbar = ['/login', '/register', '/forgot-password', '/verify-reset-otp', '/reset-password'].includes(location.pathname);
 
   return (
     <div className="flex flex-col min-h-screen">

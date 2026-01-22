@@ -47,7 +47,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=10, unique=True, default=generate_nanoid)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    otp = models.CharField(max_length=6, blank=True, null=True)
+    otp_created_at = models.DateTimeField(blank=True, null=True)
 
     objects = CustomUserManager()
 

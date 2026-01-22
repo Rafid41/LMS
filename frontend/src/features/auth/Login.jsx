@@ -108,7 +108,10 @@ export default function Login() {
           </button>
         </form>
 
-        <p className="text-center text-sm text-green-300 mt-4 hover:text-green-400 cursor-pointer transition">
+        <p 
+            onClick={() => navigate('/forgot-password')}
+            className="text-center text-sm text-green-300 mt-4 hover:text-green-400 cursor-pointer transition"
+        >
           Forgot password?
         </p>
 

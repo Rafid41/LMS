@@ -5,6 +5,9 @@ import Courses from './pages/Courses';
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import Logout from './features/auth/Logout';
+import ForgotPassword from './features/auth/ForgotPassword';
+import VerifyResetOtp from './features/auth/VerifyResetOtp';
+import ResetPassword from './features/auth/ResetPassword';
 import CourseDetail from './pages/CourseDetail';
 import CategoryCourses from './pages/CategoryCourses';
 import QuizStart from './features/quiz/QuizStart';
@@ -29,6 +32,9 @@ function App() {
             <Route path="/" element={<Courses />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/verify-reset-otp" element={<VerifyResetOtp />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:courseId" element={<CourseDetail />} />
             <Route path="/courses/category/:categoryName" element={<CategoryCourses />} />
