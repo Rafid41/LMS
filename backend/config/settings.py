@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'App_Authentication',
+    'App_Admin_Content_Management',
 ]
 
 AUTH_USER_MODEL = 'App_Authentication.User'
