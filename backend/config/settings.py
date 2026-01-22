@@ -46,7 +46,18 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'App_Authentication',
     'App_Admin_Content_Management',
+    'App_user_theme',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 AUTH_USER_MODEL = 'App_Authentication.User'
 
