@@ -8,7 +8,9 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
 from .models import TemporaryRegistration, UserType
-from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer
+from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer, LoginSerializer
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
 import random
 import string
 import datetime
@@ -163,3 +165,35 @@ class ResendOTPView(APIView):
              return Response({'error': 'Failed to send OTP email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
              
         return Response({'message': 'OTP resent successfully'}, status=status.HTTP_200_OK)
+
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
+
+        user = authenticate(username=email, password=password)
+
+        if not user:
+            return Response({'error': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        token, _ = Token.objects.get_or_create(user=user)
+        
+        # Get role
+        try:
+            role = user.user_type.user_type
+        except Exception:
+            role = 'student' # Default fallback
+
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email,
+            'role': role,
+            'message': 'Login successful'
+        }, status=status.HTTP_200_OK)
