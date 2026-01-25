@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'App_Authentication',
     'App_Admin_Content_Management',
     'App_user_theme',
+    'App_Instructors',
+    'App_Learners',
     'django_cleanup.apps.CleanupConfig',
 ]
 
