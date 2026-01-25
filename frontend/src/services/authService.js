@@ -119,3 +119,40 @@ export const resendResetOtp = async (data) => {
   }
   return { status: response.status, data: resData };
 };
+
+
+// Theme API
+const THEME_API_URL = "http://127.0.0.1:8000/api/theme";
+
+const getHeaders = () => {
+  const token = localStorage.getItem("token");
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Token ${token}`,
+  };
+};
+
+export const getTheme = async () => {
+  const response = await fetch(`${THEME_API_URL}/`, {
+    method: "GET",
+    headers: getHeaders(),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw { response: { data, status: response.status } };
+  }
+  return { status: response.status, data };
+};
+
+export const updateTheme = async (theme) => {
+  const response = await fetch(`${THEME_API_URL}/`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ theme }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw { response: { data, status: response.status } };
+  }
+  return { status: response.status, data };
+};

@@ -1,14 +1,51 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import * as authService from '../services/authService';
 
 const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // Initialize from localStorage if available
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark';
+  });
+  const [loading, setLoading] = useState(true);
 
-  const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
+  useEffect(() => {
+    const fetchTheme = async () => {
+      // Basic check if user is logged in (has token)
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await authService.getTheme();
+          const serverTheme = res.data.theme === 'dark';
+          setIsDarkMode(serverTheme);
+          localStorage.setItem('theme', res.data.theme); // Sync local storage
+        } catch (error) {
+          console.error("Failed to fetch theme", error);
+        }
+      }
+      setLoading(false);
+    };
+    fetchTheme();
+  }, []);
+
+  const toggleTheme = async () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem('theme', newMode ? 'dark' : 'light'); // Save immediately
+    
+    // Sync with backend if logged in
+    const token = localStorage.getItem('token');
+    if (token) {
+        try {
+            await authService.updateTheme(newMode ? 'dark' : 'light');
+        } catch (error) {
+            console.error("Failed to update theme", error);
+        }
+    }
   };
 
   return (
