@@ -23,3 +23,4 @@ urlpatterns = [
     path('api/admin-content/', include('App_Admin_Content_Management.urls')),
     path('', include('App_user_theme.urls')),
 ]
+# Trigger reload

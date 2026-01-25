@@ -20,6 +20,18 @@ const AdminDashboard = () => {
             <h3 className="text-xl font-bold mb-2 text-emerald-400">Language Management</h3>
             <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>Add, edit, or remove system languages.</p>
         </Link>
+        
+        <Link 
+            to="/admin/timezones" 
+            className={`block p-6 rounded-xl transition border ${
+                isDarkMode 
+                ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' 
+                : 'bg-white border-gray-200 hover:bg-gray-100 shadow-sm'
+            }`}
+        >
+            <h3 className="text-xl font-bold mb-2 text-emerald-400">Timezone Management</h3>
+            <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>Manage system timezones.</p>
+        </Link>
       </div>
     </div>
   );

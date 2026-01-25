@@ -18,6 +18,7 @@ import StudentDashboard from './features/dashboards/StudentDashboard';
 import TeacherDashboard from './features/dashboards/TeacherDashboard';
 import AdminDashboard from './features/dashboards/AdminDashboard';
 import LanguageManager from './features/admin/LanguageManager';
+import TimezoneManager from './features/admin/TimezoneManager';
 import Profile from './pages/Profile';
 import Categories from './pages/Categories';
 import NoticeDetails from './pages/NoticeDetails';
@@ -76,6 +77,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <LanguageManager />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/timezones" 
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <TimezoneManager />
                 </ProtectedRoute>
               } 
             />
