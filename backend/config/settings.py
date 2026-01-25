@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'App_Authentication',
     'App_Admin_Content_Management',
     'App_user_theme',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 REST_FRAMEWORK = {
