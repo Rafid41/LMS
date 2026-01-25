@@ -23,6 +23,7 @@ import Categories from './pages/Categories';
 import NoticeDetails from './pages/NoticeDetails';
 import WebsiteSettings from './pages/WebsiteSettings';
 import { ThemeProvider } from './contexts/ThemeContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -46,10 +47,38 @@ function App() {
             <Route path="/courses/:courseId/quiz/:moduleId/exam" element={<Quiz />} />
             <Route path="/courses/:courseId/quiz/:moduleId/result" element={<QuizResult />} />
             <Route path="/courses/:courseId/quiz/:moduleId/review" element={<QuizReview />} />
-            <Route path="/student" element={<StudentDashboard />} />
-            <Route path="/teacher" element={<TeacherDashboard />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/languages" element={<LanguageManager />} />
+            <Route 
+              path="/student" 
+              element={
+                <ProtectedRoute allowedRoles={['student', 'teacher', 'admin']}>
+                  <StudentDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/teacher" 
+              element={
+                <ProtectedRoute allowedRoles={['teacher', 'admin']}>
+                  <TeacherDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin" 
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/languages" 
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <LanguageManager />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<WebsiteSettings />} />
           </Routes>

@@ -149,14 +149,36 @@ const Navbar = () => {
                 Categories
               </Link>
             </li>
-            <li>
-              <Link
-                to={getDashboardPath()}
-                className="hover:text-emerald-500 transition-colors duration-300"
-              >
-                Dashboard
-              </Link>
-            </li>
+            {user && (
+              <li>
+                <Link
+                  to="/student"
+                  className="hover:text-emerald-500 transition-colors duration-300"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
+            {(user?.role === 'teacher' || user?.role === 'admin') && (
+              <li>
+                <Link
+                  to="/teacher"
+                  className="hover:text-emerald-500 transition-colors duration-300"
+                >
+                  Instructor Dashboard
+                </Link>
+              </li>
+            )}
+            {user?.role === 'admin' && (
+              <li>
+                <Link
+                  to="/admin"
+                  className="hover:text-emerald-500 transition-colors duration-300"
+                >
+                  Admin Dashboard
+                </Link>
+              </li>
+            )}
           </ul>
 
           {/* Notification */}
@@ -330,15 +352,39 @@ const Navbar = () => {
                 Categories
               </Link>
             </li>
-            <li>
-              <Link
-                to={getDashboardPath()}
-                onClick={() => setMenuOpen(false)}
-                className="block hover:text-emerald-500 transition"
-              >
-                Dashboard
-              </Link>
-            </li>
+            {user && (
+              <li>
+                <Link
+                  to="/student"
+                  onClick={() => setMenuOpen(false)}
+                  className="block hover:text-emerald-500 transition"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
+            {(user?.role === 'teacher' || user?.role === 'admin') && (
+              <li>
+                <Link
+                  to="/teacher"
+                  onClick={() => setMenuOpen(false)}
+                  className="block hover:text-emerald-500 transition"
+                >
+                  Instructor Dashboard
+                </Link>
+              </li>
+            )}
+            {user?.role === 'admin' && (
+              <li>
+                <Link
+                  to="/admin"
+                  onClick={() => setMenuOpen(false)}
+                  className="block hover:text-emerald-500 transition"
+                >
+                  Admin Dashboard
+                </Link>
+              </li>
+            )}
             {!user && (
               <li>
                 <Link
