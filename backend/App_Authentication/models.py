@@ -47,7 +47,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=10, unique=True, default=generate_nanoid)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_created_at = models.DateTimeField(blank=True, null=True)
@@ -59,6 +58,43 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+class CommonProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='common_profile')
+
+    # Public Identity
+    full_name = models.CharField(max_length=120)
+    profile_photo = models.ImageField(upload_to='profiles/', null=True, blank=True)
+
+    # Personal Info
+    date_of_birth = models.DateField(null=True, blank=True)
+    gender = models.CharField(
+        max_length=20,
+        choices=[('male','Male'),('female','Female')],
+    )
+    Address = models.CharField(max_length=1200, null=True, blank=True)
+
+    # Platform Settings
+    timezone = models.CharField(max_length=50, default='Asia/Dhaka') 
+
+    # Status & Control
+    is_blocked = models.BooleanField(default=False)
+
+    # System
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # Social / Web
+    website = models.URLField(null=True, blank=True)
+    linkedin = models.URLField(null=True, blank=True)
+    github = models.URLField(null=True, blank=True)
+    facebook = models.URLField(null=True, blank=True)
+    whatsApp = models.URLField(null=True, blank=True)
+    twitter_X = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.full_name
 
 class UserType(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
