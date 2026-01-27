@@ -19,6 +19,7 @@ import TeacherDashboard from './features/dashboards/TeacherDashboard';
 import AdminDashboard from './features/dashboards/AdminDashboard';
 import LanguageManager from './features/admin/LanguageManager';
 import TimezoneManager from './features/admin/TimezoneManager';
+import SubjectTagManager from './features/admin/SubjectTagManager';
 import Profile from './features/profile/ProfilePage';
 import Categories from './pages/Categories';
 import NoticeDetails from './pages/NoticeDetails';
@@ -85,6 +86,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <TimezoneManager />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/subject-tags" 
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <SubjectTagManager />
                 </ProtectedRoute>
               } 
             />

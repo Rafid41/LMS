@@ -22,3 +22,15 @@ class Timezones(models.Model):
     
     class Meta:
         verbose_name_plural = "Timezones"
+
+class Subject_Tag(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Subject Tags"

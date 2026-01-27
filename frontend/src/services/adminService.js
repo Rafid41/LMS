@@ -108,3 +108,54 @@ export const deleteTimezone = async (id) => {
   }
   return true;
 };
+
+// Subject Tag APIs
+export const getSubjectTags = async () => {
+  const response = await fetch(`${API_URL}/subject-tags/`, {
+    method: "GET",
+    headers: getHeaders(),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw { response: { data, status: response.status } };
+  }
+  return data;
+};
+
+export const addSubjectTag = async (data) => {
+  const response = await fetch(`${API_URL}/subject-tags/`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify(data),
+  });
+  const resData = await response.json();
+  if (!response.ok) {
+    throw { response: { data: resData, status: response.status } };
+  }
+  return resData;
+};
+
+export const updateSubjectTag = async (id, data) => {
+  const response = await fetch(`${API_URL}/subject-tags/${id}/`, {
+    method: "PUT",
+    headers: getHeaders(),
+    body: JSON.stringify(data),
+  });
+  const resData = await response.json();
+  if (!response.ok) {
+    throw { response: { data: resData, status: response.status } };
+  }
+  return resData;
+};
+
+export const deleteSubjectTag = async (id) => {
+  const response = await fetch(`${API_URL}/subject-tags/${id}/`, {
+    method: "DELETE",
+    headers: getHeaders(),
+  });
+  if (!response.ok) {
+    const data = await response.json();
+    throw { response: { data, status: response.status } };
+  }
+  return true;
+};
