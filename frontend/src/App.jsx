@@ -19,7 +19,7 @@ import TeacherDashboard from './features/dashboards/TeacherDashboard';
 import AdminDashboard from './features/dashboards/AdminDashboard';
 import LanguageManager from './features/admin/LanguageManager';
 import TimezoneManager from './features/admin/TimezoneManager';
-import Profile from './pages/Profile';
+import Profile from './features/profile/ProfilePage';
 import Categories from './pages/Categories';
 import NoticeDetails from './pages/NoticeDetails';
 import WebsiteSettings from './pages/WebsiteSettings';
@@ -88,7 +88,14 @@ function App() {
                 </ProtectedRoute>
               } 
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute allowedRoles={['student', 'teacher', 'admin']}>
+                  <Profile />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="/settings" element={<WebsiteSettings />} />
           </Routes>
         </MainLayout>

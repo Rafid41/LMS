@@ -7,8 +7,10 @@ from django.contrib.auth.hashers import make_password
 from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
-from .models import TemporaryRegistration, UserType
-from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer, LoginSerializer, ForgotPasswordSerializer, VerifyResetOTPSerializer, ResetPasswordSerializer, ResendForgotPasswordOTPSerializer
+from .models import TemporaryRegistration, UserType, CommonProfile
+from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer, LoginSerializer, ForgotPasswordSerializer, VerifyResetOTPSerializer, ResetPasswordSerializer, ResendForgotPasswordOTPSerializer, CommonProfileSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import generics
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 import random
@@ -125,6 +127,12 @@ class VerifyOTPView(APIView):
             )
             # Create UserType
             UserType.objects.create(user=user, user_type=temp_reg.user_type)
+
+            # Create CommonProfile
+            CommonProfile.objects.create(
+                user=user,
+                full_name=email.split('@')[0], # Default name from email
+            )
             
             # Cleanup temp reg
             temp_reg.delete()
@@ -321,3 +329,15 @@ class ResendForgotPasswordOTPView(APIView):
              return Response({'error': 'Failed to send OTP email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response({'message': 'OTP resent successfully'}, status=status.HTTP_200_OK)
+
+class ProfileView(generics.RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CommonProfileSerializer
+
+    def get_object(self):
+        # Ensure profile exists (if created manually or before migration)
+        profile, created = CommonProfile.objects.get_or_create(
+            user=self.request.user,
+            defaults={'full_name': self.request.user.email.split('@')[0]}
+        )
+        return profile

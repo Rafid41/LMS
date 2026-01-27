@@ -9,7 +9,7 @@ class InstructorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='instructor_profile')
 
     # Professional Identity
-    title = models.CharField(max_length=120, null=True, blank=True)  # Senior Dev, Lecturer, etc
+    designation = models.CharField(max_length=120, null=True, blank=True)  # Senior Dev, Lecturer, etc
     short_bio = models.CharField(max_length=300)
     full_bio = models.TextField(null=True, blank=True)
 

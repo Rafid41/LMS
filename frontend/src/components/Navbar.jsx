@@ -258,7 +258,7 @@ const Navbar = () => {
                 }`}
               >
                 <Link
-                  to="#"
+                  to="/profile"
                   onClick={() => setProfileOpen(false)}
                   className={`block px-4 py-2 text-sm transition ${
                     isDarkMode

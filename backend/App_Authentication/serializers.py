@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
-from .models import UserType, TemporaryRegistration
+from .models import UserType, TemporaryRegistration, CommonProfile
 import re
 
 User = get_user_model()
@@ -80,3 +80,17 @@ class ResetPasswordSerializer(serializers.Serializer):
 
 class ResendForgotPasswordOTPSerializer(serializers.Serializer):
     email = serializers.EmailField()
+
+class CommonProfileSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source='user.email', read_only=True)
+    role = serializers.CharField(source='user.user_type.user_type', read_only=True)
+
+    class Meta:
+        model = CommonProfile
+        fields = [
+            'id', 'email', 'role', 'full_name', 'profile_photo', 
+            'date_of_birth', 'gender', 'Address', 'timezone', 'is_blocked',
+            'created_at', 'updated_at', 'website', 'linkedin', 'github', 
+            'facebook', 'whatsApp', 'twitter_X'
+        ]
+        read_only_fields = ['id', 'email', 'role', 'is_blocked', 'created_at', 'updated_at']

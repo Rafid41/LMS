@@ -1,6 +1,6 @@
-const API_URL = "http://127.0.0.1:8000/api/admin-content";
+export const API_URL = "http://127.0.0.1:8000/api/admin-content";
 
-const getHeaders = () => {
+export const getHeaders = () => {
   const token = localStorage.getItem("token");
   return {
     "Content-Type": "application/json",
