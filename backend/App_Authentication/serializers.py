@@ -91,6 +91,6 @@ class CommonProfileSerializer(serializers.ModelSerializer):
             'id', 'email', 'role', 'full_name', 'profile_photo', 
             'date_of_birth', 'gender', 'Address', 'timezone', 'is_blocked',
             'created_at', 'updated_at', 'website', 'linkedin', 'github', 
-            'facebook', 'whatsApp', 'twitter_X'
+            'facebook', 'whatsApp', 'twitter_X', 'email_for_communication'
         ]
         read_only_fields = ['id', 'email', 'role', 'is_blocked', 'created_at', 'updated_at']

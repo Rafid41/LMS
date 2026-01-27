@@ -16,8 +16,8 @@ class InstructorProfile(models.Model):
     teaching_languages = models.JSONField(default=list)  # ["English", "Bangla"]
 
     # Organization
-    organization = models.CharField(max_length=150, null=True, blank=True)
-    years_of_experience = models.PositiveSmallIntegerField(null=True, blank=True)
+    organization = models.CharField(max_length=150)
+    years_of_experience = models.FloatField(default=0)
 
     # Teaching Stats (auto calculated)
     total_courses = models.PositiveIntegerField(default=0)

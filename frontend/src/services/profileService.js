@@ -36,3 +36,31 @@ export const updateProfile = async (data) => {
     }
     return resData;
 };
+
+export const updateLearnerProfile = async (data) => {
+    const headers = getHeaders();
+    const response = await fetch(`${API_URL.replace('admin-content', 'learner')}/profile/`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(data),
+    });
+    const resData = await response.json();
+    if (!response.ok) {
+        throw { response: { data: resData, status: response.status } };
+    }
+    return resData;
+};
+
+export const updateInstructorProfile = async (data) => {
+    const headers = getHeaders();
+    const response = await fetch(`${API_URL.replace('admin-content', 'instructor')}/profile/`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(data),
+    });
+    const resData = await response.json();
+    if (!response.ok) {
+        throw { response: { data: resData, status: response.status } };
+    }
+    return resData;
+};

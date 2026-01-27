@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from App_Admin_Content_Management.models import Subject_Tag
 import uuid
 
 User = get_user_model()
@@ -9,7 +10,7 @@ class LearnerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='learner_profile')
 
     # Learning Preferences
-    interests = models.JSONField(default=list)  # ["Web", "AI"]
+    interests = models.ManyToManyField(Subject_Tag, blank=True)
 
     # Gamification Global Stats
     total_xp = models.PositiveIntegerField(default=0)

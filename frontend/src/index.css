@@ -1,3 +1,105 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Scrollbar for dark mode compatibility */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 20px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+}
+
+/* React Country State City - Dark Mode Overrides */
+.dark-select-container .stdropdown-container {
+  background-color: #374151 !important; /* bg-gray-700 */
+  border-color: #4b5563 !important; /* border-gray-600 */
+  color: white !important;
+}
+
+.dark-select-container .stdropdown-input {
+  background-color: #374151 !important;
+  color: white !important;
+  border: 1px solid #4b5563 !important;
+}
+
+.dark-select-container .stdropdown-input::placeholder {
+  color: #9ca3af !important; /* text-gray-400 */
+}
+
+.dark-select-container .stdropdown-menu {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  border-color: #374151 !important;
+  color: white !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.dark-select-container .stdropdown-item {
+  color: #e5e7eb !important; /* text-gray-200 */
+}
+
+.dark-select-container .stdropdown-item:hover {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+/* React Select / Timezone Select Dark Mode */
+.react-select__control {
+  background-color: transparent !important;
+  border-color: #d1d5db !important; /* gray-300 */
+}
+
+/* Dark Mode Overrides */
+.dark .react-select__control {
+  background-color: #374151 !important; /* gray-700 */
+  border-color: #4b5563 !important;      /* gray-600 */
+}
+
+.dark .react-select__single-value,
+.dark .react-select__input-container,
+.dark .react-select__input {
+  color: #f3f4f6 !important; /* gray-100 */
+}
+
+.dark .react-select__placeholder {
+    color: #9ca3af !important; /* gray-400 */
+}
+
+.dark .react-select__menu {
+  background-color: #1f2937 !important; /* gray-800 */
+  border: 1px solid #374151 !important; /* gray-700 */
+  color: #f3f4f6 !important;
+}
+
+.dark .react-select__option {
+  background-color: #1f2937 !important;
+  color: #f3f4f6 !important;
+}
+
+.dark .react-select__option--is-focused,
+.dark .react-select__option:hover {
+  background-color: #374151 !important; /* gray-700 */
+  cursor: pointer;
+}
+
+.dark .react-select__option--is-selected {
+    background-color: #4f46e5 !important; /* indigo-600 */
+    color: white !important;
+}
+
+.dark .react-select__indicator,
+.dark .react-select__dropdown-indicator,
+.dark .react-select__indicator-separator {
+    color: #9ca3af !important; /* gray-400 */
+}
+
+.dark .react-select__indicator:hover {
+    color: #f3f4f6 !important;
+}

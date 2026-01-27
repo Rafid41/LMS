@@ -73,7 +73,8 @@ class CommonProfile(models.Model):
         max_length=20,
         choices=[('male','Male'),('female','Female')],
     )
-    Address = models.CharField(max_length=1200, null=True, blank=True)
+    # Address stored as JSON: { country, state, city, street_address }
+    Address = models.JSONField(null=True, blank=True)
 
     # Platform Settings
     timezone = models.CharField(max_length=50, default='Asia/Dhaka') 
@@ -86,6 +87,7 @@ class CommonProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # Social / Web
+    email_for_communication = models.EmailField(blank=True, null=True)
     website = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
     github = models.URLField(null=True, blank=True)

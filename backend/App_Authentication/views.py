@@ -9,6 +9,10 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from .models import TemporaryRegistration, UserType, CommonProfile
 from .serializers import RegisterSerializer, VerifyOTPSerializer, ResendOTPSerializer, LoginSerializer, ForgotPasswordSerializer, VerifyResetOTPSerializer, ResetPasswordSerializer, ResendForgotPasswordOTPSerializer, CommonProfileSerializer
+from App_Learners.models import LearnerProfile
+from App_Learners.serializers import LearnerProfileSerializer
+from App_Instructors.models import InstructorProfile
+from App_Instructors.serializers import InstructorProfileSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import generics
 from rest_framework.authtoken.models import Token
@@ -330,14 +334,53 @@ class ResendForgotPasswordOTPView(APIView):
 
         return Response({'message': 'OTP resent successfully'}, status=status.HTTP_200_OK)
 
-class ProfileView(generics.RetrieveUpdateAPIView):
+class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = CommonProfileSerializer
 
-    def get_object(self):
-        # Ensure profile exists (if created manually or before migration)
-        profile, created = CommonProfile.objects.get_or_create(
-            user=self.request.user,
-            defaults={'full_name': self.request.user.email.split('@')[0]}
+    def get(self, request):
+        user = request.user
+        
+        # 1. Common Profile
+        common_profile, _ = CommonProfile.objects.get_or_create(
+            user=user,
+            defaults={'full_name': user.email.split('@')[0]}
         )
-        return profile
+        common_serializer = CommonProfileSerializer(common_profile)
+        
+        # 2. Learner Profile (if student)
+        learner_data = None
+        # Check if user has learner profile (or just create one if missing)
+        # Assuming all users can have a learner profile or just students?
+        # Let's ensure one exists for now as per requirements.
+        learner_profile, _ = LearnerProfile.objects.get_or_create(user=user)
+        learner_serializer = LearnerProfileSerializer(learner_profile)
+        learner_data = learner_serializer.data
+
+        # 3. Instructor Profile (if teacher/admin)
+        instructor_data = None
+        role = 'student'
+        try:
+            role = user.user_type.user_type
+        except:
+             pass
+        
+        if role == 'teacher' or role == 'admin':
+             instructor_profile, _ = InstructorProfile.objects.get_or_create(user=user)
+             instructor_serializer = InstructorProfileSerializer(instructor_profile)
+             instructor_data = instructor_serializer.data
+
+        return Response({
+            'common_profile': common_serializer.data,
+            'learner_profile': learner_data,
+            'instructor_profile': instructor_data,
+            'role': role
+        }, status=status.HTTP_200_OK)
+
+    def patch(self, request):
+        user = request.user
+        common_profile = CommonProfile.objects.get(user=user)
+        serializer = CommonProfileSerializer(common_profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
