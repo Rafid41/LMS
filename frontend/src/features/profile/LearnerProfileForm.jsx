@@ -95,7 +95,7 @@ const LearnerProfileForm = ({ learnerData, setLearnerData }) => {
                     <h4 className={`text-sm font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                         Selected Interests
                     </h4>
-                    <div className="flex flex-wrap gap-2 min-h-[40px] p-4 rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                    <div className={`flex flex-wrap gap-2 min-h-[40px] p-4 rounded-xl border ${isDarkMode ? 'border-gray-700 bg-gray-800/50' : 'border-gray-200 bg-gray-50 shadow-inner'}`}>
                         {(() => {
                             const currentInterestIds = learnerData.interest_ids || learnerData.interests?.map(i => i.id) || [];
                             const selectedTags = (allTags || []).filter(tag => currentInterestIds.includes(tag.id));
