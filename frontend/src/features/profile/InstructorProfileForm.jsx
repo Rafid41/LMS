@@ -120,12 +120,11 @@ const InstructorProfileForm = ({ instructorData, setInstructorData }) => {
                     </div>
 
                     <div>
-                        <label className={labelClass}>Short Bio * (Max 300 chars)</label>
+                        <label className={labelClass}>Short Bio (Max 300 chars)</label>
                         <textarea 
                             name="short_bio"
                             value={instructorData.short_bio || ""}
                             onChange={handleInputChange}
-                            required
                             maxLength={300}
                             rows={3}
                             className={inputClass}

@@ -10,7 +10,7 @@ class InstructorProfile(models.Model):
 
     # Professional Identity
     designation = models.CharField(max_length=120, null=True, blank=True)  # Senior Dev, Lecturer, etc
-    short_bio = models.CharField(max_length=300)
+    short_bio = models.CharField(max_length=300, null=True, blank=True)
     full_bio = models.TextField(null=True, blank=True)
 
     teaching_languages = models.JSONField(default=list)  # ["English", "Bangla"]
