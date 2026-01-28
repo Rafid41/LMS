@@ -59,13 +59,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+from .utils import rename_profile_picture, process_profile_picture
+
 class CommonProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='common_profile')
 
     # Public Identity
     full_name = models.CharField(max_length=120)
-    profile_photo = models.ImageField(upload_to='profiles/', null=True, blank=True)
+    profile_photo = models.ImageField(
+        upload_to=rename_profile_picture, 
+        default='profile_picture/default_profile_picture.png',
+        null=True, 
+        blank=True
+    )
 
     # Personal Info
     date_of_birth = models.DateField(null=True, blank=True)
@@ -94,6 +101,25 @@ class CommonProfile(models.Model):
     facebook = models.URLField(null=True, blank=True)
     whatsApp = models.CharField(max_length=20, null=True, blank=True)
     twitter_X = models.URLField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        # Check if this is a new upload or an update
+        if self.pk:
+            try:
+                old_profile = CommonProfile.objects.get(pk=self.pk)
+                if old_profile.profile_photo != self.profile_photo and self.profile_photo:
+                    # New image uploaded, process it
+                    # We check if it's not the default image to avoid processing that
+                    if 'default_profile_picture.png' not in self.profile_photo.name:
+                        self.profile_photo = process_profile_picture(self.profile_photo)
+            except CommonProfile.DoesNotExist:
+                pass # Should be new instance case logic below
+        
+        # If it's a new instance and has a photo that isn't default
+        if not self.pk and self.profile_photo and 'default_profile_picture.png' not in self.profile_photo.name:
+             self.profile_photo = process_profile_picture(self.profile_photo)
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.full_name

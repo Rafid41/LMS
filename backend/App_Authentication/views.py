@@ -209,11 +209,20 @@ class LoginView(APIView):
         except Exception:
             role = 'student' # Default fallback
 
+        # Get profile photo
+        profile_photo = None
+        if hasattr(user, 'common_profile') and user.common_profile.profile_photo:
+            try:
+                profile_photo = request.build_absolute_uri(user.common_profile.profile_photo.url)
+            except Exception:
+                profile_photo = None
+
         return Response({
             'token': token.key,
             'user_id': user.pk,
             'email': user.email,
             'role': role,
+            'profile_photo': profile_photo,
             'message': 'Login successful'
         }, status=status.HTTP_200_OK)
 
@@ -345,7 +354,7 @@ class ProfileView(APIView):
             user=user,
             defaults={'full_name': user.email.split('@')[0]}
         )
-        common_serializer = CommonProfileSerializer(common_profile)
+        common_serializer = CommonProfileSerializer(common_profile, context={'request': request})
         
         # 2. Learner Profile (if student)
         learner_data = None
@@ -379,7 +388,7 @@ class ProfileView(APIView):
     def patch(self, request):
         user = request.user
         common_profile = CommonProfile.objects.get(user=user)
-        serializer = CommonProfileSerializer(common_profile, data=request.data, partial=True)
+        serializer = CommonProfileSerializer(common_profile, data=request.data, partial=True, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

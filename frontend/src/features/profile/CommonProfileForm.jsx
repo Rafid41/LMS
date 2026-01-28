@@ -12,9 +12,11 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import TimezoneSelect from 'react-timezone-select';
 import { updateProfile } from '../../services/profileService';
 import { API_URL } from '../../services/adminService';
+import { useAuth } from '../../contexts/AuthContext';
 
 const CommonProfileForm = ({ profileData, setProfileData }) => {
     const { isDarkMode } = useTheme();
+    const { updateUser } = useAuth();
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [error, setError] = useState("");
@@ -45,11 +47,20 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
     };
 
     const handlePhotoChange = (e) => {
-        // Handle file upload separately or as part of form data
-        setProfileData({ ...profileData, profile_photo: e.target.files[0] });
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) { // 2MB restriction
+                setError("Image size exceeds 2MB. Please upload a smaller image.");
+                return;
+            }
+            // Clear any previous file-related errors
+            if (error.includes("Image size")) setError("");
+            
+            setProfileData({ ...profileData, profile_photo: file });
+        }
     };
 
-     const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
@@ -71,7 +82,16 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
             });
 
             const updatedProfile = await updateProfile(formData);
-            setProfileData(updatedProfile); // Update local state with server response (e.g. new photo URL)
+            
+            // Update local state
+            setProfileData(updatedProfile); 
+            
+            // Update Global Auth Context (Navbar)
+            // Ensure we pass the updated photo URL if present
+            if (updatedProfile.profile_photo) {
+                updateUser({ profile_photo: updatedProfile.profile_photo });
+            }
+
             setSuccessMessage("Profile updated successfully!");
         } catch (err) {
             setError("Failed to update profile. " + (err.response?.data?.detail || ""));
@@ -117,6 +137,9 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                             />
                         </div>
+                        <p className={`text-xs text-center ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            Max size: 2MB<br/>Formats: JPG, PNG, WEBP
+                        </p>
                     </div>
 
                     {/* Basic Info */}

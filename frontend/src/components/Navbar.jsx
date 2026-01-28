@@ -240,7 +240,7 @@ const Navbar = () => {
               className="focus:outline-none"
             >
               <img
-                src="/assets/images/profile_image/default_profile_img.png"
+                src={user?.profile_photo || "http://127.0.0.1:8000/media/profile_picture/default_profile_picture.png"}
                 alt="Profile"
                 className={`h-9 w-9 rounded-full object-cover border transition ${
                   isDarkMode

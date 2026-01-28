@@ -29,8 +29,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("lms_session");
   };
 
+  const updateUser = (updates) => {
+    setUser((prevUser) => {
+        const newUser = { ...prevUser, ...updates };
+        localStorage.setItem("lms_session", JSON.stringify(newUser));
+        return newUser;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
