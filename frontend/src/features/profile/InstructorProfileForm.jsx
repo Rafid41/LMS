@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Save, Plus, X } from 'lucide-react';
 import { updateInstructorProfile } from '../../services/profileService';
-// Assuming we might have a component or select for languages, 
-// for now using a simple text input or tag input system.
-// A real app might fetch available languages from backend.
+import { getLanguages } from '../../services/adminService';
 
 const InstructorProfileForm = ({ instructorData, setInstructorData }) => {
     const { isDarkMode } = useTheme();
     const [loading, setLoading] = useState(false);
+    const [languagesLoading, setLanguagesLoading] = useState(true);
+    const [availableLanguages, setAvailableLanguages] = useState([]);
     const [successMessage, setSuccessMessage] = useState("");
     const [error, setError] = useState("");
     const [languageInput, setLanguageInput] = useState("");
+
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            try {
+                const data = await getLanguages();
+                // Handle potential pagination or raw array
+                const langs = Array.isArray(data) ? data : (data?.results || []);
+                setAvailableLanguages(langs);
+            } catch (err) {
+                console.error("Failed to load languages", err);
+            } finally {
+                setLanguagesLoading(false);
+            }
+        };
+        fetchLanguages();
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -23,13 +39,15 @@ const InstructorProfileForm = ({ instructorData, setInstructorData }) => {
     };
 
     const addLanguage = (e) => {
-        e.preventDefault();
-        if (languageInput.trim() && !(instructorData.teaching_languages || []).includes(languageInput.trim())) {
+        // e is optional if called from select onChange directly
+        if (e) e.preventDefault();
+        
+        if (languageInput && !(instructorData.teaching_languages || []).includes(languageInput)) {
             setInstructorData({
                 ...instructorData,
-                teaching_languages: [...(instructorData.teaching_languages || []), languageInput.trim()]
+                teaching_languages: [...(instructorData.teaching_languages || []), languageInput]
             });
-            setLanguageInput("");
+            setLanguageInput(""); // Reset selection
         }
     };
 
@@ -59,6 +77,11 @@ const InstructorProfileForm = ({ instructorData, setInstructorData }) => {
 
     const inputClass = `w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'}`;
     const labelClass = `block text-sm font-medium mb-1 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`;
+
+    // Filter available languages: Exclude already selected ones
+    const filteredAvailableLanguages = availableLanguages.filter(
+        lang => !(instructorData.teaching_languages || []).includes(lang.language_name)
+    );
 
     return (
         <form onSubmit={handleSubmit} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -150,22 +173,41 @@ const InstructorProfileForm = ({ instructorData, setInstructorData }) => {
 
                      <div>
                         <label className={labelClass}>Teaching Languages</label>
-                        <div className="flex gap-2 mb-3">
-                            <input 
-                                type="text"
+                        <div className="mb-3">
+                            <select
                                 value={languageInput}
-                                onChange={(e) => setLanguageInput(e.target.value)}
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    setLanguageInput(val);
+                                    if(val) {
+                                         // Automatically add on select, or could use a button. 
+                                         // Requirement says "dropdown", usually implies selection adds it or selects for adding.
+                                         // Let's call addLanguage immediately for smoother UX or keep button?
+                                         // "data wont be visible in dropdown" -> implies selection removes it from list.
+                                         // Let's add it immediately.
+                                         if ( val && !(instructorData.teaching_languages || []).includes(val)) {
+                                            setInstructorData(prev => ({
+                                                ...prev,
+                                                teaching_languages: [...(prev.teaching_languages || []), val]
+                                            }));
+                                            setLanguageInput(""); // Reset to default
+                                         }
+                                    }
+                                }}
                                 className={inputClass}
-                                placeholder="Add language (e.g. English)"
-                                onKeyDown={(e) => e.key === 'Enter' && addLanguage(e)}
-                            />
-                             <button 
-                                type="button"
-                                onClick={addLanguage}
-                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+                                disabled={languagesLoading}
                             >
-                                <Plus size={20} />
-                            </button>
+                                <option value="">Select a language...</option>
+                                {languagesLoading ? (
+                                    <option disabled>Loading...</option>
+                                ) : (
+                                    filteredAvailableLanguages.map(lang => (
+                                        <option key={lang.id} value={lang.language_name}>
+                                            {lang.language_name}
+                                        </option>
+                                    ))
+                                )}
+                            </select>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {instructorData.teaching_languages?.length > 0 ? instructorData.teaching_languages.map((lang, index) => (
