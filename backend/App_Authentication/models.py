@@ -92,7 +92,7 @@ class CommonProfile(models.Model):
     linkedin = models.URLField(null=True, blank=True)
     github = models.URLField(null=True, blank=True)
     facebook = models.URLField(null=True, blank=True)
-    whatsApp = models.URLField(null=True, blank=True)
+    whatsApp = models.CharField(max_length=20, null=True, blank=True)
     twitter_X = models.URLField(null=True, blank=True)
 
     def __str__(self):

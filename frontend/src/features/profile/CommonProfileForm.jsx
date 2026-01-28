@@ -327,11 +327,11 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
                      <div className="relative">
                         <MessageCircle className="absolute top-3 left-3 text-green-500" size={18} />
                         <input 
-                            type="url" 
+                            type="text" 
                             name="whatsApp" 
                             value={profileData.whatsApp || ""}
                             onChange={handleInputChange}
-                            placeholder="WhatsApp Link" 
+                            placeholder="WhatsApp Number" 
                             className={`${inputClass} pl-10`}
                         />
                     </div>
