@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
-import { Save, Tag, Award, Flame, Zap } from 'lucide-react';
+import { Save, Tag, Award, Flame, Zap, X, Plus } from 'lucide-react';
 import { getSubjectTags } from '../../services/adminService';
 import { updateLearnerProfile } from '../../services/profileService';
 
@@ -80,7 +80,7 @@ const LearnerProfileForm = ({ learnerData, setLearnerData }) => {
                 </p>
 
                 {/* Search Box */}
-                <div className="mb-4">
+                <div className="mb-6">
                      <input 
                          type="text"
                          placeholder="Search topics..."
@@ -90,32 +90,73 @@ const LearnerProfileForm = ({ learnerData, setLearnerData }) => {
                      />
                 </div>
 
-                {tagLoading ? (
-                    <div className="py-8 text-center text-gray-500">Loading topics...</div>
-                ) : (
-                    <div className="flex flex-wrap gap-3 max-h-60 overflow-y-auto custom-scrollbar p-1">
-                        {filteredTags.map(tag => {
-                             const currentInterests = learnerData.interest_ids || learnerData.interests?.map(i => i.id) || [];
-                             const isSelected = currentInterests.includes(tag.id);
-                             return (
+                {/* Selected Tags Area */}
+                <div className="mb-6">
+                    <h4 className={`text-sm font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                        Selected Interests
+                    </h4>
+                    <div className="flex flex-wrap gap-2 min-h-[40px] p-4 rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                        {(() => {
+                            const currentInterestIds = learnerData.interest_ids || learnerData.interests?.map(i => i.id) || [];
+                            const selectedTags = (allTags || []).filter(tag => currentInterestIds.includes(tag.id));
+                            
+                            if (selectedTags.length === 0) {
+                                return <span className="text-sm text-gray-400 italic">No interests selected yet.</span>;
+                            }
+
+                            return selectedTags.map(tag => (
                                 <button
                                     key={tag.id}
                                     type="button"
                                     onClick={() => toggleInterest(tag.id)}
-                                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                                        isSelected 
-                                        ? 'bg-indigo-600 text-white shadow-md transform scale-105' 
-                                        : isDarkMode 
-                                            ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' 
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                    }`}
+                                    className="px-3 py-1.5 rounded-full text-sm font-medium bg-indigo-600 text-white shadow-md hover:bg-indigo-700 flex items-center gap-1 transition-all animate-in fade-in zoom-in duration-200"
                                 >
                                     {tag.name}
+                                    <span className="bg-indigo-500/50 rounded-full p-0.5 hover:bg-indigo-500"><X size={12} /></span>
                                 </button>
-                             );
-                        })}
+                            ));
+                        })()}
                     </div>
-                )}
+                </div>
+
+                {/* Available Tags Area */}
+                <div>
+                     <h4 className={`text-sm font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                        Available Topics
+                    </h4>
+                    {tagLoading ? (
+                        <div className="py-8 text-center text-gray-500">Loading topics...</div>
+                    ) : (
+                        <div className="flex flex-wrap gap-2 max-h-60 overflow-y-auto custom-scrollbar p-1">
+                            {filteredTags.filter(tag => {
+                                const currentInterestIds = learnerData.interest_ids || learnerData.interests?.map(i => i.id) || [];
+                                return !currentInterestIds.includes(tag.id);
+                            }).map(tag => (
+                                <button
+                                    key={tag.id}
+                                    type="button"
+                                    onClick={() => toggleInterest(tag.id)}
+                                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
+                                        isDarkMode 
+                                            ? 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600 hover:border-gray-500' 
+                                            : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-indigo-200 hover:text-indigo-600'
+                                    }`}
+                                >
+                                    <Plus size={14} className="inline mr-1 opacity-50" />
+                                    {tag.name}
+                                </button>
+                            ))}
+                            {filteredTags.filter(tag => {
+                                const currentInterestIds = learnerData.interest_ids || learnerData.interests?.map(i => i.id) || [];
+                                return !currentInterestIds.includes(tag.id);
+                            }).length === 0 && (
+                                <div className="w-full text-center py-4 text-gray-400 text-sm">
+                                    No more topics available matching "{searchTerm}"
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* 2. Gamification Stats (Read Only) */}
