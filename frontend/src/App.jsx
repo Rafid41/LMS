@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import MainLayout from './components/MainLayout';
 import Courses from './pages/Courses';
 import Login from './features/auth/Login';
@@ -31,6 +32,10 @@ function App() {
   return (
     <Router>
       <ThemeProvider>
+        <Toaster position="top-right" toastOptions={{
+          style: { background: '#0f172a', color: '#fff' },
+          success: { iconTheme: { primary: '#10b981', secondary: '#fff' } },
+        }}/>
         <MainLayout>
           <Routes>
             <Route path="/" element={<Courses />} />

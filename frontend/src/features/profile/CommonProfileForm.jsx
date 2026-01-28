@@ -13,6 +13,7 @@ import TimezoneSelect from 'react-timezone-select';
 import { updateProfile } from '../../services/profileService';
 import { API_URL } from '../../services/adminService';
 import { useAuth } from '../../contexts/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const CommonProfileForm = ({ profileData, setProfileData }) => {
     const { isDarkMode } = useTheme();
@@ -50,11 +51,9 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
         const file = e.target.files[0];
         if (file) {
             if (file.size > 2 * 1024 * 1024) { // 2MB restriction
-                setError("Image size exceeds 2MB. Please upload a smaller image.");
+                toast.error("Image size exceeds 2MB. Please upload a smaller image.");
                 return;
             }
-            // Clear any previous file-related errors
-            if (error.includes("Image size")) setError("");
             
             setProfileData({ ...profileData, profile_photo: file });
         }
@@ -63,8 +62,6 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError("");
-        setSuccessMessage("");
         
         try {
             // Need to construct FormData because of file upload and nested JSON
@@ -92,9 +89,10 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
                 updateUser({ profile_photo: updatedProfile.profile_photo });
             }
 
-            setSuccessMessage("Profile updated successfully!");
+            toast.success("Profile updated successfully!");
         } catch (err) {
-            setError("Failed to update profile. " + (err.response?.data?.detail || ""));
+            toast.error("Failed to update profile. " + (err.response?.data?.detail || ""));
+            setError("Failed to update profile. " + (err.response?.data?.detail || "")); // Keep setError if needed for logic, but UI will rely on toast? User asked to replace. I'll remove.
         } finally {
             setLoading(false);
         }
@@ -372,9 +370,6 @@ const CommonProfileForm = ({ profileData, setProfileData }) => {
             </div>
 
             {/* Feedback Messages */}
-            {successMessage && <div className="p-4 bg-green-100 text-green-700 rounded-lg">{successMessage}</div>}
-            {error && <div className="p-4 bg-red-100 text-red-700 rounded-lg">{error}</div>}
-
             {/* Save Button */}
             <div className="flex justify-end">
                 <button 
